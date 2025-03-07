@@ -1,0 +1,25 @@
+<div class="container d-flex justify-content-center align-items-center">
+    <div class="container-login">
+        <h1 class="title text-center py-2 fw-semibold">Bienvenido</h1>
+        <div class="container-form shadow-lg rounded-4">
+            <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+                <h1 class="title text-center py-5">Login</h1>
+                <div class="input-group">
+                    <label for="email">Email</label>
+                    <input pInputText id="email" 
+                    placeholder="Ingresa tu email"/>
+                </div>
+                <div class="input-group">
+                    <label for="contraseña">Password</label>
+                    <input pInputText id="contraseña" 
+                    placeholder="Ingresa tu contraseña"/>
+                </div>
+                <div class="d-flex flex-column text-center py-4">
+                    <span>No tienes una cuenta?</span>
+                    <a href="">Registrate aqui</a>
+                </div>
+                <p-button class="button-login text-center w-100" type="submit">Login</p-button>
+            </form>
+        </div>
+    </div>
+</div>
