@@ -1,0 +1,52 @@
+<p-sidebar [styleClass]="collapsed?'ng-sidenav collapse':'ng-sidenav'" [visible]="true" showCloseIcon="false" [modal]="collapsed?true:false">
+    <ng-template class="p-0" pTemplate="header">
+        <div class="logo-container">
+            <button class="logo"><i class="pi pi-prime"></i></button>
+            @if(collapsed) {
+                <div class="logo-text">Tienda Online</div>
+                @if(screenWidth <= 768) {
+                    <button class="btn-close" (click)="closeSidenav()">
+                        <i class="pi pi-times close-icon"></i>
+                    </button>
+                }
+            }
+        </div>
+    </ng-template>
+
+    <ng-template pTemplate="content">
+        <ul class="sidenav-nav delete">
+            @for(data of sidebarData; track $index) {
+                <li class="sidenav-nav-item"
+                routerLinkActive="active"
+                [routerLinkActiveOptions]="{exact:true}">
+
+                <a class="sidenav-nav-link" [routerLink] ="[data.routeLink]">
+                    <i class="sidenav-link-icon" [class]="data.icon"></i>
+                    @if(collapsed){
+                        <span class="sidenav-link-text">
+                            {{data.label}}
+                        </span>
+                    }
+                </a>
+
+            </li>
+            }
+        </ul>
+    </ng-template>
+
+    <ng-template pTemplate="footer">
+        <hr style="margin: 0px 16px;">
+        <ul class="sidenav-nav">
+            <li class="sidenav-nav-item">
+                <a class="sidenav-nav-link">
+                    <i class="sidenav-link-icon pi pi-sign-out"></i>
+                    @if(collapsed) {
+                        <span class="sidenav-link-text" >
+                            Salir
+                        </span>
+                    }
+                </a>
+            </li>
+        </ul>
+    </ng-template>
+</p-sidebar>

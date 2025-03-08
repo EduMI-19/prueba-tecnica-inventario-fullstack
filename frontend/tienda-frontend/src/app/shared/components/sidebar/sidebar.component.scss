@@ -1,0 +1,106 @@
+.logo-container {
+    display: flex;
+    align-items: center;
+    padding: 0.938rem 0.938rem 0 0.938rem;
+    width: 100%;
+  
+    .logo {
+      background: var(--blue-500);
+      color: #fff;
+      text-align: center;
+      height: 3rem;
+      width: 3rem;
+      min-width: 3rem;
+      border-radius: 0.313rem;
+      padding: 0.313rem;
+      cursor: pointer;
+      border: none;
+  
+      i {
+        font-size: 1.5rem;
+      }
+    }
+    .logo-text {
+      margin-left: 1.5rem;
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--blue-500);
+    }
+    .btn-close {
+      margin-left: auto;
+      cursor: pointer;
+      width: 2rem;
+      height: 2rem;
+      border-radius: 50%;
+      background-color: transparent;
+      border: none;
+  
+      .fa-times {
+        color: #fff;
+        font-size: 24px;
+      }
+    }
+  }
+  
+  .delete {
+    overflow: hidden;
+  }
+  
+  .sidenav-nav {
+    list-style: none;
+    padding: 0.938rem 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: calc(100% - 3.65rem);
+    cursor: pointer;
+  
+    .sidenav-nav-item {
+      width: 100%;
+      border-left: 0.3rem solid transparent;
+  
+      .sidenav-nav-link {
+        display: flex;
+        align-items: center;
+        padding: 0 0.938rem;
+        height: 3rem;
+        color: #282828;
+        text-decoration: none;
+        transition: all 0.3s ease;
+  
+        .sidenav-link-icon {
+          color: var(--blue-500);
+          font-size: 22px;
+          width: 2rem;
+          min-width: 2rem;
+          margin: 0 0.5rem 0 0.2rem;
+          text-align: center;
+        }
+  
+        .sidenav-link-text {
+          margin-left: 1.5rem;
+        }
+      }
+    }
+  
+    .sidenav-nav-item:hover {
+      border-left: 0.3rem solid var(--blue-500);
+      .sidenav-nav-link {
+        background-color: var(--blue-100);
+      }
+      .sidenav-link-text {
+        color: var(--blue-500);
+      }
+    }
+  }
+  
+  .active {
+    border-left: 0.3rem solid var(--blue-500) !important;
+    background-color: var(--blue-100);
+    .sidenav-link-icon,
+    .sidenav-link-text {
+      color: var(--blue-500);
+    }
+  }
+  

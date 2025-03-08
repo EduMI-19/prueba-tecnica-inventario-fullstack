@@ -1,1 +1,11 @@
-<app-login></app-login>
+<app-sidebar 
+    [collapsed]="isSidebarCollapsed">
+</app-sidebar>
+<div class="body" [ngClass]="getBodyClass()">
+    <app-header (toggleCollapsed)="collapseEvent()">
+    </app-header>
+    <router-outlet></router-outlet>
+    <div class="container">
+        <h2>Contenido</h2>
+    </div>
+</div>

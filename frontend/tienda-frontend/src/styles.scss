@@ -17,3 +17,16 @@
 body{
     background: #fdfdfd;
 }
+
+.ng-sidenav{
+    transition: all .5s ease;
+    position: fixed;
+    width: 5rem;
+    * {
+        padding: 0;
+    }
+}
+
+.collapse{
+    width: 16.5625rem;
+}
