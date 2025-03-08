@@ -18,11 +18,6 @@ export class SidebarComponent {
   
   sidebarData = [
     {
-        routeLink: 'dashboard',
-        icon: 'pi pi-gauge',
-        label: 'Dashboard'
-    },
-    {
         routeLink:'producto',
         icon:'pi pi-box',
         label:'Producto'

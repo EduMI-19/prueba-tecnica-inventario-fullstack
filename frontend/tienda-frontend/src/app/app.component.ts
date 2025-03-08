@@ -1,11 +1,11 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { SidebarComponent } from "./shared/components/sidebar/sidebar.component";
 import { CommonModule } from '@angular/common';
 import { SidebarModule } from 'primeng/sidebar';
 import { ButtonModule } from 'primeng/button';
-import { HeaderComponent } from './shared/components/header/header.component';
 import { LoginComponent } from './auth/login/login.component';
+import { HeaderComponent } from './shared/components/header/header.component';
+import { SidebarComponent } from './shared/components/sidebar/sidebar.component';
 
 @Component({
   selector: 'app-root',
@@ -18,6 +18,7 @@ export class AppComponent implements OnInit {
   title = 'tienda-frontend';
   isSidebarCollapsed:boolean = false;
   screenWidth:number = 0;
+  session:boolean = false;
 
   @HostListener('window:resize', ['$event'])
   onResize(event:any){
@@ -49,5 +50,9 @@ export class AppComponent implements OnInit {
       styleClass = 'body-md-screen';
     }
     return styleClass;
+  }
+
+  onsessionChanged(event:boolean){
+    this.session = event;
   }
 }

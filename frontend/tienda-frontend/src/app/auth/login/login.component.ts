@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ButtonModule } from 'primeng/button';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
@@ -13,10 +13,10 @@ import { InputTextModule } from 'primeng/inputtext';
 })
 export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
+  @Output() sessionChanged : EventEmitter<boolean> = new EventEmitter<boolean>();
 
   constructor(
-    private fb: FormBuilder,
-    private router: Router
+    private fb: FormBuilder
   ) {}
 
   ngOnInit(): void {
@@ -29,6 +29,7 @@ export class LoginComponent implements OnInit {
   onSubmit(): void {
     if (this.loginForm.valid) {
       console.log('Credenciales:', this.loginForm.value);
+      this.sessionChanged.emit(true);
     }
   }
 }
