@@ -1,4 +1,4 @@
-import { Component, HostListener, Input } from '@angular/core';
+import { Component, EventEmitter, HostListener, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { SidebarModule } from 'primeng/sidebar';
@@ -15,16 +15,16 @@ export class SidebarComponent {
   @Input() collapsed:boolean=false;
   isModalActive:boolean = false;
   screenWidth:number = 0;
-  
+  @Output() logout : EventEmitter<boolean> = new EventEmitter<boolean>();
+
   sidebarData = [
     {
         routeLink:'producto',
         icon:'pi pi-box',
         label:'Producto'
     }
-]
+  ];
 
-  constructor() {}
 
   @HostListener('window:resize', ['$event'])
   onResize(event:any){
@@ -48,5 +48,8 @@ export class SidebarComponent {
         this.isModalActive = true;
       }
     }
+  }
+  onLogout():void{
+    this.logout.emit(false);
   }
 }

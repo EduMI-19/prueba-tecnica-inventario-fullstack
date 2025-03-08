@@ -1,14 +1,18 @@
 @if(session){
     <app-sidebar 
-        [collapsed]="isSidebarCollapsed">
+        [collapsed]="isSidebarCollapsed"
+        (logout)="onsessionChanged($event)">
     </app-sidebar>
     <div class="body" [ngClass]="getBodyClass()">
-        <app-header (toggleCollapsed)="collapseEvent()">
+        <app-header 
+        (toggleCollapsed)="collapseEvent()"
+        [userEmail]="userEmail">
         </app-header>
         <router-outlet></router-outlet>
     </div>
 } @else {
     <app-login
-    (sessionChanged)="onsessionChanged($event)">
+    (sessionChanged)="onsessionChanged($event)"
+    (userEmailChanged)="updateUserEmail($event)">
     </app-login>
 }

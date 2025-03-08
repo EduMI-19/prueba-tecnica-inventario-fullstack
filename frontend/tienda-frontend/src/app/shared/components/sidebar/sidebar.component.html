@@ -1,7 +1,7 @@
 <p-sidebar [styleClass]="collapsed?'ng-sidenav collapse':'ng-sidenav'" [visible]="true" showCloseIcon="false" [modal]="collapsed?true:false">
     <ng-template class="p-0" pTemplate="header">
         <div class="logo-container">
-            <button class="logo"><i class="pi pi-prime"></i></button>
+            <button class="logo"><i class="pi pi-shop"></i></button>
             @if(collapsed) {
                 <div class="logo-text">Tienda Online</div>
                 @if(screenWidth <= 768) {
@@ -38,7 +38,7 @@
         <hr style="margin: 0px 16px;">
         <ul class="sidenav-nav">
             <li class="sidenav-nav-item">
-                <a class="sidenav-nav-link">
+                <a class="sidenav-nav-link" (click)="onLogout()">
                     <i class="sidenav-link-icon pi pi-sign-out"></i>
                     @if(collapsed) {
                         <span class="sidenav-link-text" >

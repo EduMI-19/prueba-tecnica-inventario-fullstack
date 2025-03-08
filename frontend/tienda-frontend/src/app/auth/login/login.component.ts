@@ -14,6 +14,7 @@ import { InputTextModule } from 'primeng/inputtext';
 export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
   @Output() sessionChanged : EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Output() userEmailChanged: EventEmitter<string> = new EventEmitter<string>();
 
   constructor(
     private fb: FormBuilder
@@ -30,6 +31,7 @@ export class LoginComponent implements OnInit {
     if (this.loginForm.valid) {
       console.log('Credenciales:', this.loginForm.value);
       this.sessionChanged.emit(true);
+      this.userEmailChanged.emit(this.loginForm.value.email); 
     }
   }
 }

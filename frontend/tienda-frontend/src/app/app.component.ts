@@ -18,7 +18,8 @@ export class AppComponent implements OnInit {
   title = 'tienda-frontend';
   isSidebarCollapsed:boolean = false;
   screenWidth:number = 0;
-  session:boolean = false;
+  session:boolean = true;
+  userEmail: string = '';
 
   @HostListener('window:resize', ['$event'])
   onResize(event:any){
@@ -54,5 +55,10 @@ export class AppComponent implements OnInit {
 
   onsessionChanged(event:boolean){
     this.session = event;
+    console.log('Sesion:', this.session);
+  }
+
+  updateUserEmail(email: string) {
+    this.userEmail = email;
   }
 }
