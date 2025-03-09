@@ -1,0 +1,43 @@
+<div class="shadow p-4 rounded-2 d-flex align-items-center justify-content-end">
+    @if(isAdmin){
+        <div class="me-auto">
+            <p-button styleClass="m-1" label="Nuevo" icon="pi pi-plus" />
+            <p-button styleClass="m-1" label="Generar Reporte" icon="pi pi-file-pdf" severity="danger"/>
+        </div>
+    }
+    <div class="d-flex flex-wrap">
+        <div class="m-1">
+            <label for="nameFilter" class="me-2">Nombre:</label>
+            <input id="nameFilter"
+            pInputText 
+            [(ngModel)]="nameFilter"
+            placeholder="Buscar por nombre..."/>
+        </div>
+          
+        <div class="m-1">
+            <label for="categoryFilter" class="me-2">Categoría:</label>
+            <p-dropdown id="categoryFilter" 
+                [options]="categories" 
+                [(ngModel)]="selectedCategory" 
+                optionLabel="label"
+                placeholder="Todas las categorías"
+                [showClear]="true">
+            </p-dropdown>
+        </div>
+
+        <div class="m-1">
+            <label for="stockFilter" class="me-2">Stock:</label>
+            <p-dropdown id="stockFilter" 
+                [options]="stocks" 
+                [(ngModel)]="selectedStock" 
+                optionLabel="label"
+                placeholder="Todos"
+                [showClear]="true">
+            </p-dropdown>
+        </div>
+
+        <div>
+            <p-button styleClass="m-1" (click)="onSearch()">Buscar</p-button>
+        </div>
+    </div>
+</div>

@@ -1,1 +1,16 @@
-<p>producto works!</p>
+<div class="mx-5">
+    <h1 class="text-center">Product Managment</h1>
+    <app-filters
+    [isAdmin]="isAdmin"
+    (applyFilters)="applyFilters($event)">
+    </app-filters>
+    <div class="shadow p-4 rounded-2 mt-4">
+        <app-table 
+        [columns]="tableColumns"
+        [data]="filteredData"
+        [showActions]="isAdmin"
+        (onEdit)="editItem($event)"
+        (onDelete)="deleteItem($event)">
+        </app-table>
+    </div>
+</div>
