@@ -17,7 +17,7 @@ interface Column {
 })
 export class ProductoComponent {
   filteredData: any[] = [];
-  isAdmin: boolean = true;
+  isAdmin: boolean = false;
   modalTitle: string = '';
   
   showModal = false;
@@ -126,6 +126,9 @@ export class ProductoComponent {
 
   deleteItem(item: any) {
     console.log('Eliminar:', item);
+  }
+  notifyItem(item: any) {
+    console.log('Notificar:', item);
   }
 
   openModal() {
