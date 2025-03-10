@@ -1,0 +1,75 @@
+<p-dialog [header]="modalTitle" [(visible)]="visible" [modal]="true" [responsive]="true" (onHide)="closeModal()" [style]="{width: '550px'}">
+    <form [formGroup]="productForm" class="p-fluid grid gap-3">
+
+        <div class="field col-12 mb-2">
+            <label for="name">Nombre</label>
+            <input pInputText id="name" formControlName="name">
+            @if (productForm.get('name')?.invalid && productForm.get('name')?.touched) {
+            <small class="text-danger block mt-1">
+                @if (productForm.get('name')?.hasError('required')) {
+                <span>Campo obligatorio</span>
+                }
+                @if (productForm.get('name')?.hasError('maxlength')) {
+                <span>Máximo 50 caracteres</span>
+                }
+            </small>
+            }
+        </div>
+
+        <div class="field col-12 mb-2">
+            <label for="description">Descripción</label>
+            <input pInputText id="description" formControlName="description">
+            @if (productForm.get('description')?.invalid && productForm.get('description')?.touched) {
+            <small class="text-danger block mt-1">Máximo 255 caracteres</small>
+            }
+        </div>
+
+        <div class="field col-12 mb-2">
+            <label for="category">Categoría</label>
+            <p-dropdown id="category" [options]="categories" formControlName="category" 
+            optionLabel="name"
+            placeholder="Seleccione categoría">
+            </p-dropdown>
+            @if (productForm.get('category')?.invalid && productForm.get('category')?.touched) {
+            <small class="text-danger block mt-1">Seleccione una categoría</small>
+            }
+        </div>
+
+        <div class="field col-6 mb-2">
+            <label for="price">Precio (S/.)</label>
+            <p-inputNumber id="price" formControlName="price" mode="currency" currency="PEN" 
+            locale="es-PE" 
+            [min]="0.1"
+            [maxFractionDigits]="2">
+            </p-inputNumber>
+            @if (productForm.get('price')?.invalid && productForm.get('price')?.touched) {
+            <small class="text-danger block mt-1">Valor mínimo: S/ 0.10</small>
+            }
+        </div>
+
+        <div class="field col-6 mb-2">
+            <label for="inventory">Inventario</label>
+            <p-inputNumber id="inventory" formControlName="inventory" [min]="0" [max]="1000"></p-inputNumber>
+            @if (productForm.get('inventory')?.invalid && productForm.get('inventory')?.touched) {
+            <small class="text-danger block mt-1">
+                @if (productForm.get('inventory')?.hasError('required')) {
+                <span>Campo obligatorio</span>
+                }
+                @if (productForm.get('inventory')?.hasError('min')) {
+                <span>Mínimo 0 unidades</span>
+                }
+            </small>
+            }
+        </div>
+    </form>
+
+    <ng-template pTemplate="footer">
+        <p-button type="button" label="Cancelar" icon="pi pi-times" severity="danger"
+            (click)="closeModal()">
+        </p-button>
+
+        <p-button type="button" label="Guardar" icon="pi pi-check" severity="success" (click)="saveProduct()"
+            [disabled]="productForm.invalid">
+        </p-button>
+    </ng-template>
+</p-dialog>

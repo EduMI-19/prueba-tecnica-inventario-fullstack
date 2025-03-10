@@ -1,7 +1,7 @@
 <div class="shadow p-4 rounded-2 d-flex align-items-center justify-content-end">
     @if(isAdmin){
         <div class="me-auto">
-            <p-button styleClass="m-1" label="Nuevo" icon="pi pi-plus" />
+            <p-button styleClass="m-1" label="Nuevo" icon="pi pi-plus" (click)="onNuevo()"/>
             <p-button styleClass="m-1" label="Generar Reporte" icon="pi pi-file-pdf" severity="danger"/>
         </div>
     }

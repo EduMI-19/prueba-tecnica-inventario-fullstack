@@ -1,11 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { DropdownModule } from 'primeng/dropdown';
-import { InputTextModule } from 'primeng/inputtext';
-import { FormsModule } from '@angular/forms';
-import { ButtonModule } from 'primeng/button';
-import { CardModule } from 'primeng/card';
+import { Component } from '@angular/core';
 import { TableComponent } from '../../shared/components/table/table.component';
 import { FiltersComponent } from '../components/filters/filters.component';
+import { ModalComponent } from '../components/modal/modal.component';
 
 interface Column {
   field: string;
@@ -15,17 +11,20 @@ interface Column {
 @Component({
   selector: 'app-producto',
   standalone: true,
-  imports: [TableComponent, FiltersComponent],
+  imports: [TableComponent, FiltersComponent, ModalComponent],
   templateUrl: './producto.component.html',
   styleUrl: './producto.component.scss'
 })
 export class ProductoComponent {
   filteredData: any[] = [];
-  isAdmin: boolean = false;
+  isAdmin: boolean = true;
+  modalTitle: string = '';
   
-  name: string = '';
-  category: any;
-  stock: any;
+  showModal = false;
+  categories = [
+    { name: 'Fruta', value: 'Fruta' },
+    { name: 'Electrónica', value: 'Electrónica' }
+  ];
   
 
   ngOnInit() {
@@ -121,9 +120,21 @@ export class ProductoComponent {
 
   editItem(item: any) {
     console.log('Editar:', item);
+    this.showModal = true;
+    this.modalTitle = 'Editar producto';
   }
 
   deleteItem(item: any) {
     console.log('Eliminar:', item);
+  }
+
+  openModal() {
+    this.showModal = true;
+    this.modalTitle = 'Nuevo producto';
+  }
+
+  handleSave(productData: any) {
+    console.log('Datos a guardar:', productData);
+    this.showModal = false;
   }
 }

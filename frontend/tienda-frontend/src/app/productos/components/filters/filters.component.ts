@@ -18,7 +18,7 @@ export class FiltersComponent {
   selectedStock: any;
 
   @Output() applyFilters: EventEmitter<any> = new EventEmitter<any>();
-
+  @Output() openModal = new EventEmitter<void>();
 
   categories = [
     { label: 'Fruta', value: 'Fruta' },
@@ -36,8 +36,9 @@ export class FiltersComponent {
       stock: this.selectedStock
     }
     this.applyFilters.emit(values);
-    console.log(values);
+  }
 
-    console.log('Filters applied');
+  onNuevo(){
+    this.openModal.emit();
   }
 }

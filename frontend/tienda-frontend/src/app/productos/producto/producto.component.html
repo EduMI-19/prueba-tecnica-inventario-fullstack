@@ -2,8 +2,17 @@
     <h1 class="text-center">Product Managment</h1>
     <app-filters
     [isAdmin]="isAdmin"
-    (applyFilters)="applyFilters($event)">
+    (applyFilters)="applyFilters($event)"
+    (openModal)="openModal()">
     </app-filters>
+
+    <app-modal
+      [(visible)]="showModal"
+      [categories]="categories"
+      (save)="handleSave($event)"
+      [modalTitle]="modalTitle">
+    </app-modal>
+
     <div class="shadow p-4 rounded-2 mt-4">
         <app-table 
         [columns]="tableColumns"
