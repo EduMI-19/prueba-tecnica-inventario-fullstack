@@ -12,8 +12,7 @@ import { SidebarModule } from 'primeng/sidebar';
   styleUrl: './sidebar.component.scss'
 })
 export class SidebarComponent {
-  @Input() collapsed:boolean=false;
-  isModalActive:boolean = false;
+  @Input() collapsed:boolean = false;
   screenWidth:number = 0;
   @Output() logout : EventEmitter<boolean> = new EventEmitter<boolean>();
 
@@ -44,11 +43,10 @@ export class SidebarComponent {
       this.screenWidth = window.innerWidth;
       if (this.screenWidth <= 768) {
         this.collapsed = false;
-      } else if(this.collapsed && this.screenWidth <=768 && this.screenWidth > 0){
-        this.isModalActive = true;
       }
     }
   }
+
   onLogout():void{
     this.logout.emit(false);
   }
