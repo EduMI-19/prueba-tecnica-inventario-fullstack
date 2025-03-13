@@ -1,0 +1,7 @@
+<app-sidebar [collapsed]="isSidebarCollapsed" (logout)="onsessionChanged($event)">
+</app-sidebar>
+<div class="body" [ngClass]="getBodyClass()">
+    <app-header (toggleCollapsed)="collapseEvent()" [user]="username">
+    </app-header>
+    <router-outlet></router-outlet>
+</div>y

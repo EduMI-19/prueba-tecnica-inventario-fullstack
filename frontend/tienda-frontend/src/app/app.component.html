@@ -1,18 +1,24 @@
-@if(session){
-    <app-sidebar 
-        [collapsed]="isSidebarCollapsed"
-        (logout)="onsessionChanged($event)">
-    </app-sidebar>
-    <div class="body" [ngClass]="getBodyClass()">
-        <app-header 
-        (toggleCollapsed)="collapseEvent()"
-        [userEmail]="userEmail">
-        </app-header>
-        <router-outlet></router-outlet>
-    </div>
-} @else {
-    <app-login
-    (sessionChanged)="onsessionChanged($event)"
-    (userEmailChanged)="updateUserEmail($event)">
-    </app-login>
-}
+        <!-- @if(session){
+            <app-sidebar 
+                [collapsed]="isSidebarCollapsed"
+                (logout)="onsessionChanged($event)">
+            </app-sidebar>
+            <div class="body" [ngClass]="getBodyClass()">
+                <app-header 
+                (toggleCollapsed)="collapseEvent()"
+                [user]="username">
+                </app-header>
+                <router-outlet></router-outlet>
+            </div>
+        }
+        @else if(!session){ 
+            <app-login
+            (sessionChanged)="onsessionChanged($event)"
+            (userChanged)="updateUser($event)"
+            (register)="onRegister($event)">
+            </app-login>
+             @if(register){
+                <app-register></app-register>
+        }
+        }  -->
+ <router-outlet></router-outlet>

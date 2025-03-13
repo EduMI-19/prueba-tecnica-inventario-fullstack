@@ -6,11 +6,12 @@ import { ButtonModule } from 'primeng/button';
 import { LoginComponent } from './auth/login/login.component';
 import { HeaderComponent } from './shared/components/header/header.component';
 import { SidebarComponent } from './shared/components/sidebar/sidebar.component';
+import { RegisterComponent } from './auth/register/register.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, SidebarComponent, CommonModule, SidebarModule, ButtonModule, HeaderComponent, LoginComponent],
+  imports: [RouterOutlet, SidebarComponent, CommonModule, SidebarModule, ButtonModule, HeaderComponent, LoginComponent, RegisterComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
@@ -18,8 +19,9 @@ export class AppComponent implements OnInit {
   title = 'tienda-frontend';
   isSidebarCollapsed:boolean = false;
   screenWidth:number = 0;
-  session:boolean = true;
-  userEmail: string = '';
+  session:boolean = false;
+  register:boolean = false;
+  username: string = '';
 
   @HostListener('window:resize', ['$event'])
   onResize(event:any){
@@ -58,7 +60,12 @@ export class AppComponent implements OnInit {
     console.log('Sesion:', this.session);
   }
 
-  updateUserEmail(email: string) {
-    this.userEmail = email;
+  updateUser(user: string) {
+    this.username = user;
+    console.log(user)
+  }
+
+  onRegister(value:boolean){
+    this.register = value;
   }
 }

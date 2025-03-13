@@ -2,25 +2,27 @@
     <div class="container-login">
         <h1 class="title text-center py-2 fw-semibold">Bienvenido</h1>
         <div class="container-form shadow-lg rounded-4">
-            <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-                <h1 class="title text-center py-5">Login</h1>
-                <div class="input-group">
+            <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+                <h1 class="title text-center py-4">Registrate</h1>
+                <div class="input-group mb-4">
                     <label for="usuario">Usuario</label>
                     <input pInputText id="usuario" 
                     placeholder="Ingresa tu usuario"
                     formControlName="usuario"/>
                 </div>
-                <div class="input-group">
+                <div class="input-group mb-4">
+                    <label for="email">Email</label>
+                    <input pInputText id="email" 
+                    placeholder="Ingresa tu email"
+                    formControlName="email"/>
+                </div>
+                <div class="input-group mb-4">
                     <label for="contraseña">Password</label>
                     <input pInputText id="contraseña" 
                     placeholder="Ingresa tu contraseña"
                     formControlName="password"/>
                 </div>
-                <div class="d-flex flex-column text-center py-4">
-                    <span>No tienes una cuenta?</span>
-                    <p-button size="small" (click)="onRegister()">Registrate aqui</p-button>
-                </div>
-                <p-button styleClass="justify-content-center w-100" class="w-100" type="submit">Login</p-button>
+                <p-button styleClass="justify-content-center w-100" class="w-100" type="submit" routerLink="auth/login">Completar</p-button>
             </form>
         </div>
     </div>

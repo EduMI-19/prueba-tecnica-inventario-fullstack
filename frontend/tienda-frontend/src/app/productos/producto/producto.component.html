@@ -16,7 +16,7 @@
     <div class="shadow p-4 rounded-2 mt-4">
         <app-table 
         [columns]="tableColumns"
-        [data]="filteredData"
+        [data]="productos"
         [showActions]="isAdmin"
         (onEdit)="editItem($event)"
         (onDelete)="deleteItem($event)"

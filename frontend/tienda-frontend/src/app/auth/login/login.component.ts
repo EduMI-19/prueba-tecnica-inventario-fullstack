@@ -13,16 +13,17 @@ import { InputTextModule } from 'primeng/inputtext';
 })
 export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
-  @Output() sessionChanged : EventEmitter<boolean> = new EventEmitter<boolean>();
-  @Output() userEmailChanged: EventEmitter<string> = new EventEmitter<string>();
+  
+  @Output() userChanged: EventEmitter<string> = new EventEmitter<string>();
+  @Output() register : EventEmitter<boolean> = new EventEmitter<boolean>();
 
   constructor(
-    private fb: FormBuilder
+    private fb: FormBuilder, private router: Router
   ) {}
 
   ngOnInit(): void {
     this.loginForm = this.fb.group({
-      email: ['', [Validators.required, Validators.email]],
+      usuario: ['', [Validators.required]],
       password: ['', [Validators.required]]
     });
   }
@@ -30,8 +31,13 @@ export class LoginComponent implements OnInit {
   onSubmit(): void {
     if (this.loginForm.valid) {
       console.log('Credenciales:', this.loginForm.value);
-      this.sessionChanged.emit(true);
-      this.userEmailChanged.emit(this.loginForm.value.email); 
+      this.userChanged.emit(this.loginForm.value.usuario); 
+      this.router.navigate(['/dashboard/producto']);
     }
+  }
+  
+  onRegister():void {
+    this.router.navigate(['/register']);
+
   }
 }

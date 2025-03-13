@@ -1,7 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { TableComponent } from '../../shared/components/table/table.component';
 import { FiltersComponent } from '../components/filters/filters.component';
 import { ModalComponent } from '../components/modal/modal.component';
+import { ProductoService } from '../../shared/services/producto.service';
+import { Producto } from '../../shared/models/producto.model';
 
 interface Column {
   field: string;
@@ -15,10 +17,12 @@ interface Column {
   templateUrl: './producto.component.html',
   styleUrl: './producto.component.scss'
 })
-export class ProductoComponent {
-  filteredData: any[] = [];
-  isAdmin: boolean = false;
+export class ProductoComponent implements OnInit {
+  productos: Producto[] = [];
+  isAdmin: boolean = true;
   modalTitle: string = '';
+  idPro: number = 0;
+  isEdit: boolean = false;
   
   showModal = false;
   categories = [
@@ -26,118 +30,71 @@ export class ProductoComponent {
     { name: 'Electrónica', value: 'Electrónica' }
   ];
   
+  constructor(private productoService: ProductoService) {}
 
   ngOnInit() {
-    this.filteredData = this.fakeData;
+    this.productoService.getProductos().subscribe(data => {
+      this.productos = data;
+    });
   }
 
   tableColumns: Column[] = [
-    { field: 'name', header: 'Nombre' },
+    { field: 'nombre', header: 'Nombre' },
     { field: 'description', header: 'Descripción' },
-    { field: 'price', header: 'Precio' },
-    { field: 'inventory', header: 'Cantidad en Inventario' },
-    { field: 'category', header: 'Categoría' }
-  ];
-  
-
-  fakeData = [
-    { 
-      id: 1, 
-      name: 'Naranja', 
-      description: 'Fruta cítrica, rica en vitamina C.', 
-      price: 1.5, 
-      inventory: 4, 
-      category: 'Fruta' 
-    },
-    { 
-      id: 2, 
-      name: 'Telefono', 
-      description: 'Teléfono inteligente con pantalla táctil.', 
-      price: 500, 
-      inventory: 50, 
-      category: 'Electrónica' 
-    },
-    { 
-      id: 3, 
-      name: 'Laptop', 
-      description: 'Laptop de alto rendimiento para trabajo y juegos.', 
-      price: 1200, 
-      inventory: 30, 
-      category: 'Electrónica' 
-    },
-    { 
-      id: 4, 
-      name: 'Manzana', 
-      description: 'Fruta crujiente y dulce, muy saludable.', 
-      price: 2, 
-      inventory: 3, 
-      category: 'Fruta' 
-    },
-    { 
-      id: 5, 
-      name: 'Naranja', 
-      description: 'Fruta cítrica, rica en vitamina C.', 
-      price: 1.5, 
-      inventory: 100, 
-      category: 'Fruta' 
-    },
-    { 
-      id: 6, 
-      name: 'Telefono', 
-      description: 'Teléfono inteligente con pantalla táctil.', 
-      price: 500, 
-      inventory: 50, 
-      category: 'Electrónica' 
-    },
-    { 
-      id: 7, 
-      name: 'Laptop', 
-      description: 'Laptop de alto rendimiento para trabajo y juegos.', 
-      price: 1200, 
-      inventory: 30, 
-      category: 'Electrónica' 
-    },
-    { 
-      id: 8, 
-      name: 'Manzana', 
-      description: 'Fruta crujiente y dulce, muy saludable.', 
-      price: 2, 
-      inventory: 80, 
-      category: 'Fruta' 
-    }
+    { field: 'precio', header: 'Precio' },
+    { field: 'cantidad', header: 'Cantidad en Inventario' },
+    { field: 'categoria', header: 'Categoría' }
   ];
 
   applyFilters(values: any) {
-    this.filteredData = this.fakeData.filter(item => {
-      const name = item.name.toLowerCase().includes(values.name.toLowerCase());
-      const category = !values.category || item.category === values.category.value;
-      const stock = !values.stock || item.inventory <= values.stock.value;
+    this.productos = this.productos.filter(item => {
+      const name = item.nombre?.toLowerCase().includes(values.name.toLowerCase());
+      const category = !values.category || item.categoria === values.category.value;
+      const stock = !values.stock || item.cantidad <= values.stock.value;
       return name && category && stock;
     });
-    console.log('Filtros aplicados:', this.filteredData);
+    console.log('Filtros aplicados:', this.productos);
   }
-  
 
-  editItem(item: any) {
-    console.log('Editar:', item);
+  editItem(item: Producto) {
+    this.idPro = item.idPro;
     this.showModal = true;
     this.modalTitle = 'Editar producto';
+    this.isEdit = true;
   }
 
-  deleteItem(item: any) {
-    console.log('Eliminar:', item);
+  onProductSave(productData: Producto) {
+    console.log('Datos a guardar:', productData);
+    return productData;
   }
-  notifyItem(item: any) {
+
+  deleteItem(item: Producto) {
+    console.log('Eliminar:', item.idPro);
+    this.productoService.deleteProducto(item.idPro).subscribe(() => {
+      this.productos = this.productos.filter(p => p.idPro !== item.idPro);
+    });
+  }
+
+  notifyItem(item: Producto) {
     console.log('Notificar:', item);
   }
 
   openModal() {
     this.showModal = true;
     this.modalTitle = 'Nuevo producto';
+    this.isEdit = false;
   }
 
-  handleSave(productData: any) {
-    console.log('Datos a guardar:', productData);
+  handleSave(productData: Producto) {
+    console.log('Datos:', productData);
+    console.log('Producto id', this.idPro);
+    if (this.isEdit) {
+      console.log('Actualizando producto');
+      
+    } else {
+      console.log('Creando producto');
+      
+    }
     this.showModal = false;
   }
 }

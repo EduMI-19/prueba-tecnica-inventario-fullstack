@@ -6,6 +6,7 @@ import { DialogModule } from 'primeng/dialog';
 import { InputTextModule } from 'primeng/inputtext';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { DropdownModule } from 'primeng/dropdown';
+import { Producto } from '../../../shared/models/producto.model';
 
 @Component({
   selector: 'app-modal',
@@ -20,7 +21,7 @@ export class ModalComponent implements OnInit{
   @Input() categories: any[] = [];
   @Input() visible: boolean = false;
   @Input() modalTitle: string = '';
-  
+
   @Output() save = new EventEmitter<any>();
   @Output() visibleChange = new EventEmitter<boolean>();
 
@@ -33,7 +34,7 @@ export class ModalComponent implements OnInit{
   private initializeForm(data?: any): void {
     this.productForm = this.fb.group({
       id: [data?.id || null],
-      name: [data?.name || '', [
+      nombre: [data?.nombre || '', [
         Validators.required,
         Validators.maxLength(50)
       ]],

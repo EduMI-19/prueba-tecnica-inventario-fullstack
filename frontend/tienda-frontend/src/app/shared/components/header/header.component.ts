@@ -12,7 +12,7 @@ import { AvatarModule } from 'primeng/avatar';
 })
 export class HeaderComponent {
   @Output() toggleCollapsed = new EventEmitter<void>();
-  @Input() userEmail: string = '';
+  @Input() user: string = '';
   
   onCollapse(){
     this.toggleCollapsed.emit();

@@ -1,0 +1,28 @@
+.container{
+    height: 100vh;
+
+    .title{
+        color: var(--blue-500);
+    }
+
+    .container-form {
+        background: white;
+        border: .1rem solid #ebebeb;
+        padding: 2rem 2.5rem;
+        min-width: 400px;
+    
+        .input-group {
+            display: grid;
+
+            label {
+                color: var(--blue-500);
+            }
+            
+            input{
+                border: none;
+                border-radius: 0;
+                border-bottom: 1px solid var(--blue-500);
+            }
+        }
+    }
+}
